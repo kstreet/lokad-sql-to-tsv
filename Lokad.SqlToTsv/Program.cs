@@ -14,11 +14,10 @@ namespace Lokad.SqlToTsv
         static void Main(string[] args)
         {
             _log = new ConsoleLog();
+            _log.Info("Utility for uploading SQL data to FTP v" + Assembly.GetExecutingAssembly().GetName().Version);
 
             if (args.Length < 8)
             {
-                var version = Assembly.GetExecutingAssembly().GetName().Version.ToString();
-                _log.Info("Utility for uploading SQL data to FTP v" + version);
                 _log.Error("Not all arguments passed.");
                 _log.Info(@"Usage
 Lokad.sqltotsv.exe <SQL Host> <Database> <Login> <Password> <FTP host> <FTP folder> <FTP login> <FTP password>
@@ -81,8 +80,6 @@ Lokad.sqltotsv.exe <SQL Host> <Database> <Login> <Password> <FTP host> <FTP fold
 
                 _log.Success("Export SQL data to FTP executed successefully");
             }
-
-            Console.ReadLine();
         }
 
         static int LoadItems(SqlConnection connection, string command, string file)
