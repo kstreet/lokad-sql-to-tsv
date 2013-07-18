@@ -21,9 +21,9 @@ The excutable must be launched from the Windows command line with the following 
     Lokad.sqltotsv.exe <SQL Host> <Database> <Login> <Password> <FTP login> <FTP password>
     
 Where
-* <SQL Host> is the host name of the SQL Server
-* <Database> is the database name
-* <Login> is the username to log into the database
-* <Password> is password to log into the database
-* <FTP login> should be the email address used when registering on Lokad.
-* <FTP password> should be the password used when registering on Lokad.
+* `SQL Host` is the host name of the SQL Server
+* `Database` is the database name
+* `Login` is the username to log into the database
+* `Password` is password to log into the database
+* `FTP login` should be the email address used when registering on Lokad.
+* `FTP password` should be the password used when registering on Lokad.
