@@ -1,4 +1,4 @@
-# lokad-sql-to-tsv
+# Salescast - SQL to TSV converter
 
 Stand-alone console utility to reformat Salescast SQL data in the new Salescast TSV format.
 
