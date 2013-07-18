@@ -16,12 +16,11 @@ namespace Lokad.SqlToTsv
             _log = new ConsoleLog();
             _log.Info("Utility for uploading SQL data to FTP v" + Assembly.GetExecutingAssembly().GetName().Version);
 
-            if (args.Length < 8)
+            if (args.Length < 6)
             {
                 _log.Error("Not all arguments passed.");
                 _log.Info(@"Usage
-Lokad.sqltotsv.exe <SQL Host> <Database> <Login> <Password> <FTP host> <FTP folder> <FTP login> <FTP password>
-    <FTP folder> must exist before uploading files");
+Lokad.sqltotsv.exe <SQL Host> <Database> <Login> <Password> <FTP login> <FTP password>");
                 return;
             }
 
@@ -30,10 +29,10 @@ Lokad.sqltotsv.exe <SQL Host> <Database> <Login> <Password> <FTP host> <FTP fold
             var sqlLogin = args[2];
             var sqlPass = args[3];
 
-            var ftpHost = args[4];
-            var ftpFolder = args[5];
-            var ftpLogin = args[6];
-            var ftpPass = args[7];
+            var ftpHost = "files.lokad.com"; // hard-coding
+            var ftpFolder = ""; // HACK: hard-coding the root folder
+            var ftpLogin = args[4];
+            var ftpPass = args[5];
 
             var connectionString = string.Format("Server={0};Database={1};User Id={2};Password={3};", sqlHost, sqlDb,
                 sqlLogin, sqlPass);
