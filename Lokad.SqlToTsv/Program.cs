@@ -21,7 +21,7 @@ namespace Lokad.SqlToTsv
                 _log.Error("Not all arguments passed.");
                 _log.Info(@"Usage
 Lokad.sqltotsv.exe <SQL Host> <Database> <Login> <Password> <FTP host> <FTP folder> <FTP login> <FTP password>
-    <FTP folder> must exist before upload files");
+    <FTP folder> must exist before uploading files");
                 return;
             }
 
