@@ -20,7 +20,15 @@ namespace Lokad.SqlToTsv
             {
                 _log.Error("Not all arguments passed.");
                 _log.Info(@"Usage
-Lokad.sqltotsv.exe <SQL Host> <Database> <Login> <Password> <FTP login> <FTP password>");
+Lokad.sqltotsv.exe <SQL Host> <Database> <Login> <Password> <FTP login> <FTP password>
+
+Where
+    <SQL Host> is the host name of the SQL Server
+    <Database> is the database name
+    <Login> is the username to log into the database
+    <Password> is password to log into the database
+    <FTP login> should be the email address used when registering on Lokad.
+    <FTP password> should be the password used when registering on Lokad.");
                 return;
             }
 
@@ -29,8 +37,8 @@ Lokad.sqltotsv.exe <SQL Host> <Database> <Login> <Password> <FTP login> <FTP pas
             var sqlLogin = args[2];
             var sqlPass = args[3];
 
-            var ftpHost = "files.lokad.com"; // hard-coding
-            var ftpFolder = ""; // HACK: hard-coding the root folder
+            const string ftpHost = "files.lokad.com"; // hard-coding
+            const string ftpFolder = ""; // HACK: hard-coding the root folder
             var ftpLogin = args[4];
             var ftpPass = args[5];
 
@@ -180,7 +188,7 @@ Lokad.sqltotsv.exe <SQL Host> <Database> <Login> <Password> <FTP login> <FTP pas
 
     public class ConsoleLog
     {
-        ConsoleColor _defaultColor;
+        readonly ConsoleColor _defaultColor;
 
         public ConsoleLog()
         {
