@@ -14,6 +14,10 @@ The app perform the following sequence of operations:
 2. Reformating of the data into the new TSV format of Salescast.
 3. Upload of the files to [BigFiles](http://www.lokad.com/ftp-hosting), the file hosting service of Lokad.
 
+## Download
+
+You can download the latest version of *SqlToTsv.exe* from [releases] (https://github.com/Lokad/lokad-sql-to-tsv/releases)
+
 ## Command line arguments
 
 The excutable must be launched from the Windows command line with the following arguments:
@@ -26,4 +30,6 @@ Where
 * `Login` is the username to log into the database
 * `Password` is password to log into the database
 * `FTP login` should be the email address used when registering on Lokad.
-* `FTP password` should be the password used when registering on Lokad.
+* `FTP password` should be the password used when registering on Lokad. 
+
+
