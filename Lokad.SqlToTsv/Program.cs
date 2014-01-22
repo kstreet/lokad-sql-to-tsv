@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.IO;
@@ -16,9 +17,8 @@ namespace Lokad.SqlToTsv
             _log = new ConsoleLog();
             _log.Info("Utility for uploading SQL data to FTP v" + Assembly.GetExecutingAssembly().GetName().Version);
 
-            if (args.Length < 6)
+            if (args.Length == 1 && args[0] == "--help")
             {
-                _log.Error("Not all arguments passed.");
                 _log.Info(@"Usage
 Lokad.sqltotsv.exe <SQL Host> <Database> <Login> <Password> <FTP login> <FTP password>
 
@@ -32,15 +32,15 @@ Where
                 return;
             }
 
-            var sqlHost = args[0];
-            var sqlDb = args[1];
-            var sqlLogin = args[2];
-            var sqlPass = args[3];
+            var sqlHost = args.Length > 0 ? args[0] : ConfigurationManager.AppSettings["sqlHost"];
+            var sqlDb = args.Length > 1 ? args[1] : ConfigurationManager.AppSettings["sqlDb"];
+            var sqlLogin = args.Length > 2 ? args[2] : ConfigurationManager.AppSettings["sqlLogin"];
+            var sqlPass = args.Length > 3 ? args[3] : ConfigurationManager.AppSettings["sqlPass"];
 
             const string ftpHost = "files.lokad.com"; // hard-coding
             const string ftpFolder = ""; // HACK: hard-coding the root folder
-            var ftpLogin = args[4];
-            var ftpPass = args[5];
+            var ftpLogin = args.Length > 4 ? args[4] : ConfigurationManager.AppSettings["ftpLogin"];
+            var ftpPass = args.Length > 5 ? args[5] : ConfigurationManager.AppSettings["ftpPass"];
 
             var connectionString = string.Format("Server={0};Database={1};User Id={2};Password={3};", sqlHost, sqlDb,
                 sqlLogin, sqlPass);
