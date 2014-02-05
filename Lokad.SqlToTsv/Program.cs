@@ -8,7 +8,7 @@ using System.Reflection;
 
 namespace Lokad.SqlToTsv
 {
-    class Program
+    public class Program
     {
         static ConsoleLog _log;
 
@@ -108,11 +108,11 @@ Where
                         if (isHeaderEmpty)
                             if (i < reader.FieldCount - 1)
                             {
-                                header += CleanTabs(reader.GetName(i)) + "\t";
+                                header += CleanTsv(reader.GetName(i)) + "\t";
                             }
                             else
                             {
-                                header += CleanTabs(reader.GetName(i));
+                                header += CleanTsv(reader.GetName(i));
                             }
 
                         var dataType = reader[i].GetType();
@@ -127,7 +127,7 @@ Where
                         }
                         else
                         {
-                            value = CleanTabs(reader[i].ToString());
+                            value = CleanTsv(reader[i].ToString());
                         }
 
                         if (i < reader.FieldCount - 1)
@@ -176,13 +176,22 @@ Where
             req.GetResponse();
         }
 
-        private static string CleanTabs(string value)
+        public static string CleanTsv(string value)
         {
-            if (value.Contains("\t"))
+            if (_log != null)
             {
-                _log.Warn("Value \"{0}\" contain tab. Tabs will replaced with space.", value);
+                if (value.Contains("\t"))
+                {
+                    _log.Warn("Value \"{0}\" contains tabs. These will replaced with space.", value);
+                }
+
+                if (value.Contains("\r") || value.Contains("\n"))
+                {
+                    _log.Warn("Value \"{0}\" contains newlines. These will replaced with space.", value);
+                }
             }
-            return value.Replace("\t", " ");
+
+            return value.Replace('\t', ' ').Replace('\r', ' ').Replace('\n', ' ');
         }
     }
 

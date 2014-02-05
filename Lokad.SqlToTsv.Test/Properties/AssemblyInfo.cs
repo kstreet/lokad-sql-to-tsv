@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("SqlToTsv")]
-[assembly: AssemblyDescription("Utility to convert Salescast SQL data to Salescast TSV files")]
+[assembly: AssemblyTitle("Lokad.SqlToTsv.Test")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Lokad")]
-[assembly: AssemblyProduct("Lokad.SqlToTsv")]
+[assembly: AssemblyProduct("Lokad.SqlToTsv.Test")]
 [assembly: AssemblyCopyright("Copyright © Lokad 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("0aef8c65-c0c2-494b-84ae-2d61f24c68de")]
+[assembly: Guid("9e723bab-ec7e-4e84-a277-babb44e237e2")]
 
 // Version information for an assembly consists of the following four values:
 //
