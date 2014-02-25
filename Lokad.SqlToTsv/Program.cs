@@ -38,7 +38,7 @@ Where
             var sqlPass = args.Length > 3 ? args[3] : ConfigurationManager.AppSettings["sqlPass"];
 
             const string ftpHost = "files.lokad.com"; // hard-coding
-            const string ftpFolder = ""; // HACK: hard-coding the root folder
+            var ftpFolder = (ConfigurationManager.AppSettings["ftpDirectory"] ?? "").TrimStart('/'); 
             var ftpLogin = args.Length > 4 ? args[4] : ConfigurationManager.AppSettings["ftpLogin"];
             var ftpPass = args.Length > 5 ? args[5] : ConfigurationManager.AppSettings["ftpPass"];
 
