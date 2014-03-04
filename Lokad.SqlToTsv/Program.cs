@@ -48,7 +48,18 @@ Where
             using (var connection = new SqlConnection(connectionString))
             {
                 _log.Info("Open connection to SQL server ");
-                connection.Open();
+
+                try
+                {
+                    connection.Open();
+                }
+                catch (Exception ex)
+                {
+                    _log.Error("Error connecting to database.");
+                    _log.Error(ex.Message);
+                    Console.ReadKey(true);
+                    return;
+                }
 
                 _log.Info("Call BeforeSalescastForecast stored procedure...");
                 try
@@ -62,7 +73,9 @@ Where
                 }
                 catch (Exception ex)
                 {
-                    _log.Warn("Run BeforeSalescastForecast failed. ", ex.Message);
+                    _log.Error("Run BeforeSalescastForecast failed.");
+                    _log.Error(ex.Message);
+                    _log.Warn("Using old values instead, if available.");
                 }
 
                 _log.Info("Exporting Lokad_Items...");
