@@ -64,7 +64,7 @@ Where
                 _log.Info("Call BeforeSalescastForecast stored procedure...");
                 try
                 {
-                    using (var cmd = new SqlCommand("CALL `BeforeSalescastForecast`"))
+                    using (var cmd = new SqlCommand("CALL `BeforeSalescastForecast`", connection))
                     {
                         cmd.ExecuteNonQuery();
 
