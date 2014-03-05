@@ -64,7 +64,7 @@ Where
                 _log.Info("Call BeforeSalescastForecast stored procedure...");
                 try
                 {
-                    using (var cmd = new SqlCommand("CALL `BeforeSalescastForecast`", connection))
+                    using (var cmd = new SqlCommand("EXEC [BeforeSalescastForecast]", connection))
                     {
                         cmd.ExecuteNonQuery();
 
@@ -80,25 +80,35 @@ Where
 
                 _log.Info("Exporting Lokad_Items...");
 
-                var tempFileItems = Path.GetTempFileName();
-                var count = LoadItems(connection, "SELECT * FROM [Lokad_Items] ORDER BY [Id]", tempFileItems);
-                _log.Success("Loaded {0} items", count);
+                try
+                {
+                    var tempFileItems = Path.GetTempFileName();
+                    var count = LoadItems(connection, "SELECT * FROM [Lokad_Items] ORDER BY [Id]", tempFileItems);
+                    _log.Success("Loaded {0} items", count);
 
-                _log.Info("Exporting Lokad_Orders...");
+                    _log.Info("Exporting Lokad_Orders...");
 
-                var tempFileOrders = Path.GetTempFileName();
-                count = LoadItems(connection, "SELECT * FROM [Lokad_Orders] ORDER BY [Id]", tempFileOrders);
-                _log.Success("Loaded {0} orders", count);
+                    var tempFileOrders = Path.GetTempFileName();
+                    count = LoadItems(connection, "SELECT * FROM [Lokad_Orders] ORDER BY [Id]", tempFileOrders);
+                    _log.Success("Loaded {0} orders", count);
 
-                _log.Info("Upload Lokad_Items.tsv file...", ftpHost);
-                UploadFile(ftpLogin, ftpPass, ftpHost, ftpFolder, tempFileItems, "Lokad_Items.tsv");
-                _log.Success("Lokad_Items.tsv files uploaded");
+                    _log.Info("Upload Lokad_Items.tsv file...", ftpHost);
+                    UploadFile(ftpLogin, ftpPass, ftpHost, ftpFolder, tempFileItems, "Lokad_Items.tsv");
+                    _log.Success("Lokad_Items.tsv files uploaded");
 
-                _log.Info("Upload Lokad_Orders.tsv file...", ftpHost);
-                UploadFile(ftpLogin, ftpPass, ftpHost, ftpFolder, tempFileOrders, "Lokad_Orders.tsv");
-                _log.Success("Lokad_Orders.tsv files uploaded");
+                    _log.Info("Upload Lokad_Orders.tsv file...", ftpHost);
+                    UploadFile(ftpLogin, ftpPass, ftpHost, ftpFolder, tempFileOrders, "Lokad_Orders.tsv");
+                    _log.Success("Lokad_Orders.tsv files uploaded");
 
-                _log.Success("Export SQL data to FTP executed successefully");
+                    _log.Success("Export SQL data to FTP executed successefully");
+
+                }
+                catch (Exception ex)
+                {
+                    _log.Error("Error exporting data.");
+                    _log.Error(ex.Message);
+                    Console.ReadKey(true);
+                }
             }
         }
 
